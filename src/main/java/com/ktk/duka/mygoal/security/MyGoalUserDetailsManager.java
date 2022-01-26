@@ -1,6 +1,6 @@
 package com.ktk.duka.mygoal.security;
 
-import com.ktk.duka.mygoal.service.entity.user.UserService;
+import com.ktk.duka.mygoal.service.user.UserService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;

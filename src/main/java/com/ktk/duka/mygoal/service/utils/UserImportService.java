@@ -2,8 +2,8 @@ package com.ktk.duka.mygoal.service.utils;
 
 import com.ktk.duka.mygoal.enums.Role;
 import com.ktk.duka.mygoal.security.SecurityUtils;
-import com.ktk.duka.mygoal.service.entity.user.User;
-import com.ktk.duka.mygoal.service.entity.user.UserService;
+import com.ktk.duka.mygoal.service.user.User;
+import com.ktk.duka.mygoal.service.user.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 

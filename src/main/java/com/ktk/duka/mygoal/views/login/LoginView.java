@@ -1,7 +1,6 @@
 package com.ktk.duka.mygoal.views.login;
 
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
-import com.ktk.duka.mygoal.service.entity.user.UserService;
 import com.ktk.duka.mygoal.service.utils.UserImportService;
 import com.ktk.duka.mygoal.views.utils.MainLayout;
 import com.ktk.duka.mygoal.views.utils.ComponentUtils;

@@ -1,4 +1,4 @@
-package com.ktk.duka.mygoal.service.entity.team;
+package com.ktk.duka.mygoal.service.team;
 
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;

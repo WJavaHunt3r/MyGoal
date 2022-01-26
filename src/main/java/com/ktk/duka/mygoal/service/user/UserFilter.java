@@ -1,4 +1,4 @@
-package com.ktk.duka.mygoal.service.entity.user;
+package com.ktk.duka.mygoal.service.user;
 
 import com.ktk.duka.mygoal.enums.Role;
 import lombok.Data;

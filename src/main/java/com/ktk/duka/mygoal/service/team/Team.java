@@ -1,6 +1,6 @@
-package com.ktk.duka.mygoal.service.entity.team;
+package com.ktk.duka.mygoal.service.team;
 
-import com.ktk.duka.mygoal.service.entity.user.User;
+import com.ktk.duka.mygoal.service.user.User;
 import com.ktk.duka.mygoal.service.utils.CrudEntity;
 import lombok.Getter;
 import lombok.Setter;
