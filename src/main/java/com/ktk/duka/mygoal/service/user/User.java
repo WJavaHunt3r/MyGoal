@@ -1,7 +1,7 @@
-package com.ktk.duka.mygoal.service.entity.user;
+package com.ktk.duka.mygoal.service.user;
 
 import com.ktk.duka.mygoal.enums.Role;
-import com.ktk.duka.mygoal.service.entity.team.Team;
+import com.ktk.duka.mygoal.service.team.Team;
 import com.ktk.duka.mygoal.service.utils.CrudEntity;
 
 import lombok.Getter;

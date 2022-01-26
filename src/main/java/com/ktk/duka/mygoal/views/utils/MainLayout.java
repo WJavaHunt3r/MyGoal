@@ -2,7 +2,7 @@ package com.ktk.duka.mygoal.views.utils;
 
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
 import com.ktk.duka.mygoal.security.SecurityService;
-import com.ktk.duka.mygoal.service.entity.user.User;
+import com.ktk.duka.mygoal.service.user.User;
 import com.ktk.duka.mygoal.service.utils.TranslationProvider;
 import com.ktk.duka.mygoal.views.logout.LogoutView;
 import com.ktk.duka.mygoal.views.status.StatusView;
@@ -13,7 +13,6 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -31,7 +30,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
@@ -49,8 +47,6 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver, PageCo
 
     @Autowired
     private BusinessContextConfiguration config;
-    @Autowired
-    private ApplicationContext applicationContext;
     @Autowired
     private TranslationProvider translationProvider;
     @Autowired

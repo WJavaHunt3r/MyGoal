@@ -1,8 +1,8 @@
 package com.ktk.duka.mygoal.security;
 
 import com.ktk.duka.mygoal.enums.Role;
-import com.ktk.duka.mygoal.service.entity.user.User;
-import com.ktk.duka.mygoal.service.entity.user.UserService;
+import com.ktk.duka.mygoal.service.user.User;
+import com.ktk.duka.mygoal.service.user.UserService;
 import com.vaadin.flow.server.VaadinServletRequest;
 import lombok.Getter;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,7 +1,7 @@
 package com.ktk.duka.mygoal.views.user;
 
-import com.ktk.duka.mygoal.service.entity.user.User;
-import com.ktk.duka.mygoal.service.entity.user.UserFilter;
+import com.ktk.duka.mygoal.service.user.User;
+import com.ktk.duka.mygoal.service.user.UserFilter;
 import com.ktk.duka.mygoal.views.utils.CrudComponent;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

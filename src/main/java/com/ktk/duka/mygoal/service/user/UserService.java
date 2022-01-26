@@ -1,4 +1,4 @@
-package com.ktk.duka.mygoal.service.entity.user;
+package com.ktk.duka.mygoal.service.user;
 
 import com.ktk.duka.mygoal.service.utils.CrudService;
 import lombok.Getter;

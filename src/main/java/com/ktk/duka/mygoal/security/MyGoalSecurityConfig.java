@@ -1,6 +1,6 @@
 package com.ktk.duka.mygoal.security;
 
-import com.ktk.duka.mygoal.service.entity.user.UserService;
+import com.ktk.duka.mygoal.service.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

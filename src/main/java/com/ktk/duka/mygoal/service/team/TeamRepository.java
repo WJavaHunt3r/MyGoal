@@ -1,4 +1,4 @@
-package com.ktk.duka.mygoal.service.entity.team;
+package com.ktk.duka.mygoal.service.team;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
