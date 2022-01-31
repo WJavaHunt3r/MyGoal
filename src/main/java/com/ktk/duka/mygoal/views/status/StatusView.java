@@ -30,7 +30,9 @@ public class StatusView extends VerticalLayout implements HasDynamicTitle {
     private Tab teamStatus;
     private Tab userStatus;
 
-    public StatusView() {
+    public StatusView(UserStatusComponent userStatusComponent, TeamStatusComponent teamStatusComponent) {
+        this.userStatusComponent = userStatusComponent;
+        this.teamStatusComponent = teamStatusComponent;
         this.setup();
     }
 

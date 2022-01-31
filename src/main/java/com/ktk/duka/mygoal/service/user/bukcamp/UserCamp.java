@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +20,7 @@ import java.util.Date;
 @Table(name = "USER_CAMP")
 public class UserCamp extends CrudEntity<UserCamp, Long> {
 
-    @JoinColumn(name = "USER")
+    @JoinColumn(name = "USERS")
     @ManyToOne
     @NotNull
     private User user;

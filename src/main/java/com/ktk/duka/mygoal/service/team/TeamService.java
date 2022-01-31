@@ -18,7 +18,7 @@ public class TeamService extends CrudService<TeamFilter, Team, Long> {
     }
 
     @Override
-    public Class<Team> getTypeClass() {
+    public Class<Team> getEntityClass() {
         return Team.class;
     }
 

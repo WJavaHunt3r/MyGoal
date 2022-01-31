@@ -25,7 +25,7 @@ public class BUKSeasonService extends CrudService<BUKSeasonFilter, BUKSeason, Lo
     }
 
     @Override
-    public Class<BUKSeason> getTypeClass() {
+    public Class<BUKSeason> getEntityClass() {
         return BUKSeason.class;
     }
 

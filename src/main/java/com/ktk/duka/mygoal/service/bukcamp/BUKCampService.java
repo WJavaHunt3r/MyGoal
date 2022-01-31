@@ -26,7 +26,7 @@ public class BUKCampService extends CrudService<BUKCampFilter, BUKCamp, Long> {
     }
 
     @Override
-    public Class<BUKCamp> getTypeClass() {
+    public Class<BUKCamp> getEntityClass() {
         return BUKCamp.class;
     }
 

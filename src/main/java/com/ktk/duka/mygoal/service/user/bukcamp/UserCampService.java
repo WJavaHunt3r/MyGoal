@@ -21,7 +21,7 @@ public class UserCampService extends CrudService<UserCampFilter, UserCamp, Long>
     }
 
     @Override
-    public Class<UserCamp> getTypeClass() {
+    public Class<UserCamp> getEntityClass() {
         return UserCamp.class;
     }
 

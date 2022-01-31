@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.stream.Stream;
 
 @UtilityClass
@@ -28,8 +29,9 @@ public class SecurityUtils {
         return false;
     }
 
-    static String encryptSecret(String secret) {
-        return encrypt(secret);
+    public static String encryptSecret(String secret) {
+        String secretHash = encrypt(secret);
+        return Base64.getEncoder().withoutPadding().encodeToString(secretHash.getBytes());
     }
 
     public static String encrypt(String secret) {

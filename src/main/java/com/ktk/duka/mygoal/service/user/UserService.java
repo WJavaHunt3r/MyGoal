@@ -27,7 +27,7 @@ public class UserService extends CrudService<UserFilter, User, Long> {
     }
 
     @Override
-    public Class<User> getTypeClass() {
+    public Class<User> getEntityClass() {
         return User.class;
     }
 
