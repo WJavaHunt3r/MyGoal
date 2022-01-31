@@ -67,7 +67,7 @@ public abstract class CrudService<F, E extends CrudEntity<E, L>, L extends Seria
 
     public abstract JpaRepository<E, L> getRepository();
 
-    public abstract Class<E> getTypeClass();
+    public abstract Class<E> getEntityClass();
 
     public abstract Class<F> getFilterClass();
 

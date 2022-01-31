@@ -86,7 +86,7 @@ public class UserImportService {
         user.setRole(StringUtils.isEmpty(data[7]) ? Role.USER : Role.valueOf(data[7]));
         String username = createUserName(data[8]);
         user.setUsername(username);
-        user.setPassword(SecurityUtils.encrypt(username).replaceAll("\u0000", ""));
+        user.setPassword(SecurityUtils.encryptSecret(username));
         user.setU20(Period.between(user.getBirthDate(), LocalDate.now()).getYears() < 18);
         return user;
     }

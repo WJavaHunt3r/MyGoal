@@ -2,6 +2,7 @@ package com.ktk.duka.mygoal.security;
 
 import com.ktk.duka.mygoal.enums.Role;
 import com.ktk.duka.mygoal.views.login.LoginView;
+import com.ktk.duka.mygoal.views.logout.LogoutView;
 import com.ktk.duka.mygoal.views.status.StatusView;
 import com.ktk.duka.mygoal.views.user.UserView;
 import com.vaadin.flow.component.Component;
@@ -22,9 +23,9 @@ class Permissions {
                 LoginView.class, UserView.class, StatusView.class));
 
         VIEW_PERMISSIONS.put(Role.USER, List.of(
-                LoginView.class, StatusView.class));
+                LoginView.class, StatusView.class, LogoutView.class));
         VIEW_PERMISSIONS.put(Role.TEAM_LEADER, List.of(
-                LoginView.class, StatusView.class));
+                LoginView.class, StatusView.class, LogoutView.class));
     }
 
     static boolean hasPermission(Role role, Class<?> navigationTarget) {
