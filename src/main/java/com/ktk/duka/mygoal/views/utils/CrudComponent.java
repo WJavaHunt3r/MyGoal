@@ -5,12 +5,10 @@ import com.ktk.duka.mygoal.service.utils.CrudService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
-import com.vaadin.flow.data.provider.DataProvider;
-import com.vaadin.flow.data.provider.Query;
-import com.vaadin.flow.data.provider.QuerySortOrder;
+import com.vaadin.flow.data.provider.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.springframework.beans.factory.InitializingBean;
@@ -18,8 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.vaadin.artur.spring.dataprovider.PageableDataProvider;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends VerticalLayout implements InitializingBean {
 
@@ -36,6 +36,7 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
     public void afterPropertiesSet() throws Exception {
         this.setSpacing(true);
         this.setWidthFull();
+        this.setHeightFull();
         this.setMargin(false);
         this.setPadding(false);
 
@@ -83,7 +84,13 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
         };
     }
 
-    private com.vaadin.flow.component.Component setupF() {
+    protected void setDefaultSorting(String... propertyName) {
+        List<GridSortOrder<E>> sort = Arrays.stream(propertyName).map(name -> new GridSortOrder<E>(grid.getColumnByKey(name), SortDirection.ASCENDING)).collect(Collectors.toList());
+        grid.sort(sort);
+    }
+
+    private Component setupFilter() {
+
         return null;
     }
 }
