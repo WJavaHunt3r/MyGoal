@@ -26,5 +26,10 @@ public class UserComponent extends CrudComponent<UserFilter, User> {
                 User.Fields.birthDate,
                 User.Fields.role
         );
+
+        setDefaultSorting(
+                User.Fields.lastname,
+                User.Fields.firstname
+        );
     }
 }

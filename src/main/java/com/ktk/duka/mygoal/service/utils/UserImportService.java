@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Service
 public class UserImportService {
-    private static final String USER_DATA_URL = "C:\\Users\\wagne\\OneDrive\\Dokumentumok\\Myshare\\Pmo_lista.csv";
+    private static final String USER_DATA_URL = "C:\\Users\\awagner\\Downloads\\Pmo_lista.csv";
     private static final Map<String, String> ENGLISH_CHARS = new HashMap();
 
     private UserService userService;

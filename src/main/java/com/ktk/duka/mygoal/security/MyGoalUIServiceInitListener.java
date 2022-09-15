@@ -2,6 +2,7 @@ package com.ktk.duka.mygoal.security;
 
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
 import com.ktk.duka.mygoal.views.login.LoginView;
+import com.ktk.duka.mygoal.views.status.StatusView;
 import com.ktk.duka.mygoal.views.user.UserView;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
@@ -28,7 +29,7 @@ public class MyGoalUIServiceInitListener implements VaadinServiceInitListener {
                     if (!SecurityUtils.isUserLoggedIn()) {
                         enterEvent.rerouteTo(LoginView.class);
                     } else if (!securityService.accessGranted(enterEvent.getNavigationTarget())) {
-                        enterEvent.rerouteTo(UserView.class);
+                        enterEvent.rerouteTo(StatusView.class);
                     }
                 }
             });  

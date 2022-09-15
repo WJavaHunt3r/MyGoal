@@ -20,7 +20,7 @@ class Permissions {
 
     static {
         VIEW_PERMISSIONS.put(Role.ADMIN, List.of(
-                LoginView.class, UserView.class, StatusView.class));
+                LoginView.class, UserView.class, StatusView.class, LogoutView.class));
 
         VIEW_PERMISSIONS.put(Role.USER, List.of(
                 LoginView.class, StatusView.class, LogoutView.class));

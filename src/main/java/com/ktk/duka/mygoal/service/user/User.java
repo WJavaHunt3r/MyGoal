@@ -67,6 +67,6 @@ public class User extends CrudEntity<User, Long> {
     private long myShareID;
 
     public String getFullName(){
-        return firstname + " " + lastname;
+        return lastname + " " + firstname;
     }
 }

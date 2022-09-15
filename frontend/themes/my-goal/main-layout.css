@@ -2,6 +2,10 @@
   background-image: linear-gradient(0deg, var(--lumo-shade-5pct), var(--lumo-shade-5pct));
 }
 
+#drawer{
+  background-color: var(--lumo-primary-color);
+}
+
 [slot='drawer'] nav a {
   text-decoration: none;
   transition: color 140ms;
@@ -27,7 +31,7 @@
 }
 
 [slot='drawer'] nav a[highlight]::before {
-  background-color: var(--lumo-primary-color-10pct);
+  background-color: var(--lumo-primary-color-50pct);
 }
 
 [slot='drawer'] footer vaadin-context-menu {
