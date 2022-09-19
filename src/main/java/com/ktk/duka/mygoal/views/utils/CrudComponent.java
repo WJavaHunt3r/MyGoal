@@ -50,13 +50,12 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
 
     private Grid<E> createGrid() {
         grid = new Grid<>(crudService.getEntityClass(), false);
-        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_COLUMN_BORDERS);
+        grid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT, GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
         grid.setSizeFull();
         grid.setPageSize(50);
         grid.setMultiSort(true);
         grid.setVerticalScrollingEnabled(true);
         grid.setDataProvider(gridDataProvider = createDataProvider().withConfigurableFilter());
-
         setupGridColumns(grid);
 
         grid.getColumns().forEach(column -> column.setHeader(UI.getCurrent().getTranslation(String.join(".", crudService.getEntityClass().getName(), column.getKey()))));

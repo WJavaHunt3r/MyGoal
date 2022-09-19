@@ -38,3 +38,7 @@
   align-items: center;
   display: flex;
 }
+
+[part="header-cell"] {
+  background-color: var(--lumo-primary-color-50pct);
+}
