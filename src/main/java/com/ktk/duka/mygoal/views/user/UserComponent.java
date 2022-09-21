@@ -32,4 +32,9 @@ public class UserComponent extends CrudComponent<UserFilter, User> {
                 User.Fields.firstname
         );
     }
+
+    @Override
+    protected void setupFilterFields() {
+
+    }
 }

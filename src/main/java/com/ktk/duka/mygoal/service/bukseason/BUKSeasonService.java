@@ -35,12 +35,12 @@ public class BUKSeasonService extends CrudService<BUKSeasonFilter, BUKSeason, Lo
     }
 
     @Override
-    public BUKSeason CreateEntity() {
+    public BUKSeason createEntity() {
         return new BUKSeason();
     }
 
     @Override
-    public BUKSeasonFilter CreateFilter() {
+    public BUKSeasonFilter createFilter() {
         return new BUKSeasonFilter();
     }
 

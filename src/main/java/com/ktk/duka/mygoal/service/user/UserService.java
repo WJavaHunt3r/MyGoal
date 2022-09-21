@@ -37,12 +37,12 @@ public class UserService extends CrudService<UserFilter, User, Long> {
     }
 
     @Override
-    public User CreateEntity() {
+    public User createEntity() {
         return new User();
     }
 
     @Override
-    public UserFilter CreateFilter() {
+    public UserFilter createFilter() {
         return new UserFilter();
     }
 

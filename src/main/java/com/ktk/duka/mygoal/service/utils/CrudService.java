@@ -71,7 +71,7 @@ public abstract class CrudService<F, E extends CrudEntity<E, L>, L extends Seria
 
     public abstract Class<F> getFilterClass();
 
-    public abstract E CreateEntity();
+    public abstract E createEntity();
 
-    public abstract F CreateFilter();
+    public abstract F createFilter();
 }

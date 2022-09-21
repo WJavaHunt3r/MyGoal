@@ -7,7 +7,10 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.provider.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.vaadin.artur.spring.dataprovider.PageableDataProvider;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +29,10 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
 
     @Getter(AccessLevel.PROTECTED)
     private CrudService<F, E, ?> crudService;
+    @Getter(AccessLevel.PROTECTED)
+    private Binder<F> filterFormBinder;
     private Grid<E> grid;
+    private CrudEntity<E, ?> selected;
     private ConfigurableFilterDataProvider<E, Void, F> gridDataProvider;
 
     public CrudComponent(CrudService<F, E, ?> crudService) {
@@ -40,8 +47,7 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
         this.setMargin(false);
         this.setPadding(false);
 
-        add(setPageTitle(), createGrid());
-
+        add(setPageTitle(), setupFilter(),createGrid());
     }
 
     private Component setPageTitle() {
@@ -57,7 +63,6 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
         grid.setVerticalScrollingEnabled(true);
         grid.setDataProvider(gridDataProvider = createDataProvider().withConfigurableFilter());
         setupGridColumns(grid);
-
         grid.getColumns().forEach(column -> column.setHeader(UI.getCurrent().getTranslation(String.join(".", crudService.getEntityClass().getName(), column.getKey()))));
         return grid;
     }
@@ -68,7 +73,7 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
         return new PageableDataProvider<>() {
             @Override
             protected Page<E> fetchFromBackEnd(Query<E, F> query, Pageable pageable) {
-                return crudService.fetch(pageable);
+                return crudService.fetchByQuery(query.getFilter().orElse(crudService.createFilter()), pageable);
             }
 
             @Override
@@ -78,7 +83,7 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
 
             @Override
             protected int sizeInBackEnd(Query<E, F> query) {
-                return (int) crudService.count();
+                return (int) crudService.countByQuery(query.getFilter().orElse(crudService.createFilter()));
             }
         };
     }
@@ -89,7 +94,15 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
     }
 
     private Component setupFilter() {
+        HorizontalLayout hl = new HorizontalLayout();
 
+
+
+        TextField f = new TextField();
+
+        hl.add();
         return null;
     }
+
+    protected abstract void setupFilterFields();
 }
