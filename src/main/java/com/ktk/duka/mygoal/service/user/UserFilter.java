@@ -19,6 +19,6 @@ public class UserFilter {
 
     private LocalDate birthDateFrom;
 
-    private boolean isU20;
+    private String isU20;
 
 }

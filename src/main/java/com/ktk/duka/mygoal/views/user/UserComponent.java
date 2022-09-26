@@ -4,10 +4,13 @@ import com.ktk.duka.mygoal.service.user.User;
 import com.ktk.duka.mygoal.service.user.UserFilter;
 import com.ktk.duka.mygoal.service.user.UserService;
 import com.ktk.duka.mygoal.views.utils.CrudComponent;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+
+import java.util.List;
 
 @SpringComponent
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -34,7 +37,27 @@ public class UserComponent extends CrudComponent<UserFilter, User> {
     }
 
     @Override
-    protected void setupFilterFields() {
+    protected List<String> setupFilterFields() {
+        return List.of(
+                UserFilter.Fields.firstname,
+                UserFilter.Fields.lastname,
+                UserFilter.Fields.role,
+                UserFilter.Fields.username,
+                UserFilter.Fields.isU20
+        );
+    }
 
+    @Override
+    protected HasValue<?, ?> createFilterFieldFor(String property) {
+        if(UserFilter.Fields.birthDateFrom.equals(property)){
+            return buildDateField(property);
+        }
+        if(UserFilter.Fields.role.equals(property)){
+            return buildUserSelectField(property);
+        }
+        if(UserFilter.Fields.isU20.equals(property)){
+            return buildYesNoField(property);
+        }
+        return null;
     }
 }
