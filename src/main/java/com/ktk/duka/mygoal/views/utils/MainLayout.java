@@ -2,11 +2,15 @@ package com.ktk.duka.mygoal.views.utils;
 
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
 import com.ktk.duka.mygoal.security.SecurityService;
+import com.ktk.duka.mygoal.service.transaction.Transaction;
+import com.ktk.duka.mygoal.service.transactionitems.TransactionItem;
 import com.ktk.duka.mygoal.service.user.User;
 import com.ktk.duka.mygoal.service.utils.TranslationProvider;
 import com.ktk.duka.mygoal.views.login.LoginView;
 import com.ktk.duka.mygoal.views.logout.LogoutView;
 import com.ktk.duka.mygoal.views.status.StatusView;
+import com.ktk.duka.mygoal.views.transactionitems.TransactionItemsView;
+import com.ktk.duka.mygoal.views.transactions.TransactionView;
 import com.ktk.duka.mygoal.views.user.UserView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -70,6 +74,14 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver, PageCo
                 MenuItem.builder()
                         .route(StatusView.NAME)
                         .view(StatusView.class)
+                        .build(),
+                MenuItem.builder()
+                        .route(TransactionView.NAME)
+                        .view(TransactionView.class)
+                        .build(),
+                MenuItem.builder()
+                        .route(TransactionItemsView.NAME)
+                        .view(TransactionItemsView.class)
                         .build(),
                 MenuItem.builder()
                         .route(LogoutView.NAME)

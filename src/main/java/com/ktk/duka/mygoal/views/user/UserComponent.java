@@ -23,6 +23,7 @@ public class UserComponent extends CrudComponent<UserFilter, User> {
     @Override
     protected void setupGridColumns(Grid<User> grid) {
         grid.addColumns(
+                User.Fields.myShareID,
                 User.Fields.lastname,
                 User.Fields.firstname,
                 User.Fields.username,
