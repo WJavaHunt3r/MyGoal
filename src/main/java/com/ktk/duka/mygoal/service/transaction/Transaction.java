@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @FieldNameConstants
 public class Transaction extends CrudEntity<Transaction, Long> {
     @Size(max = 150)
-    @Column(name = "DESCRIPTION", length = 50)
+    @Column(name = "DESCRIPTION", length = 150)
     @NotNull
     private String description;
 
@@ -29,5 +29,6 @@ public class Transaction extends CrudEntity<Transaction, Long> {
     @Column(name = "TRANSACTION_DATE")
     private LocalDate transactionDate;
 
+    private boolean inMyShare;
 
 }
