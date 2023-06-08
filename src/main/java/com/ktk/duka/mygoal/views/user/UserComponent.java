@@ -5,11 +5,15 @@ import com.ktk.duka.mygoal.service.user.UserFilter;
 import com.ktk.duka.mygoal.service.user.UserService;
 import com.ktk.duka.mygoal.views.utils.CrudComponent;
 import com.vaadin.flow.component.HasValue;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.function.ValueProvider;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @SpringComponent
@@ -27,9 +31,10 @@ public class UserComponent extends CrudComponent<UserFilter, User> {
                 User.Fields.lastname,
                 User.Fields.firstname,
                 User.Fields.username,
-                User.Fields.birthDate,
                 User.Fields.role
         );
+
+        grid.addColumn(item -> Period.between(item.getBirthDate() , LocalDate.now() ).getYears()).setKey("age");
 
         setDefaultSorting(
                 User.Fields.lastname,

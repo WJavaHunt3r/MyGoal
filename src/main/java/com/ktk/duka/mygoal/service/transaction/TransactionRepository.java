@@ -13,9 +13,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query("Select t FROM Transaction t Where " +
             "(lower(t.description) LIKE lower(?1) or ?1 IS NULL OR ?1 LIKE '')" )
-    Page<Transaction> fetchByQuery(String description, LocalDate dataFrom, Pageable pageable);
+    Page<Transaction> fetchByQuery(String description, LocalDate dataFrom, boolean inMyShare, Pageable pageable);
 
     @Query("Select COUNT (t) FROM Transaction t Where " +
             "(lower(t.description) LIKE lower(?1) or ?1 IS NULL OR ?1 LIKE '')" )
-    long countByQuery(String description, LocalDate dateFrom);
+    long countByQuery(String description, LocalDate dateFrom, boolean inMyShare);
 }

@@ -46,12 +46,12 @@ public class TransactionService extends CrudService<TransactionFilter, Transacti
     @Override
     public Page<Transaction> fetchByQuery(TransactionFilter filter, Pageable pageable) {
         return repository.fetchByQuery(String.format("%%%s%%", ObjectUtils.defaultIfNull(filter.getDescription(), "")),
-                filter.getTransactionDate(), pageable);
+                filter.getTransactionDate(),filter.isInMyShare(), pageable);
     }
 
     @Override
     public long countByQuery(TransactionFilter filter) {
         return repository.countByQuery(String.format("%%%s%%", ObjectUtils.defaultIfNull(filter.getDescription(), "")),
-                filter.getTransactionDate());
+                filter.getTransactionDate(),filter.isInMyShare());
     }
 }

@@ -46,6 +46,9 @@ public class TransactionComponent extends CrudComponent<TransactionFilter, Trans
         if (TransactionFilter.Fields.transactionDate.equals(property)) {
             return buildDateField(property);
         }
+        if (TransactionFilter.Fields.inMyShare.equals(property)) {
+            return buildYesNoField(property);
+        }
         return null;
     }
 }

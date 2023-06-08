@@ -10,4 +10,5 @@ import java.time.LocalDate;
 public class TransactionFilter {
     public String description;
     public LocalDate transactionDate;
+    public boolean inMyShare;
 }

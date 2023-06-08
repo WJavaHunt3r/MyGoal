@@ -3,14 +3,16 @@ package com.ktk.duka.mygoal.views.utils;
 import com.ktk.duka.mygoal.enums.Role;
 import com.ktk.duka.mygoal.service.utils.CrudEntity;
 import com.ktk.duka.mygoal.service.utils.CrudService;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -18,17 +20,20 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.provider.*;
 import lombok.AccessLevel;
 import lombok.Getter;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.vaadin.artur.spring.dataprovider.PageableDataProvider;
 
+import javax.swing.*;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends VerticalLayout implements InitializingBean {
@@ -45,6 +50,8 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
 
     public CrudComponent(CrudService<F, E, ?> crudService) {
         this.crudService = crudService;
+        this.filterFormBinder = new Binder<F>(crudService.getFilterClass());
+        this.filterFormBinder.setBean(crudService.createFilter());
     }
 
     @Override
@@ -104,23 +111,34 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
     }
 
     private Component setupFilter() {
-        HorizontalLayout hl = new HorizontalLayout();
-        Object filter = crudService.createFilter();
 
-        filterFormBinder = new Binder<F>(crudService.getFilterClass());
+
+        bindFields(this::createFilterFieldFor, filterFormBinder);
         List<String> fields = setupFilterFields();
-        //filterFormBinder.setBean(crudService.createFilter());
-        for(String f : fields){
-            HasValue<?, ?> field = createFilterFieldFor(f);
-            if(field == null){
-                field = new TextField(ComponentUtils.getTranslation(String.join(".", crudService.getEntityClass().getName(), f)));
+
+        FormLayout layout = new FormLayout();
+        VerticalLayout filterLayout = new VerticalLayout(layout);
+        fields.forEach(propId -> filterFormBinder.getBinding(propId).map(binding -> (Component) binding.getField()).ifPresent(layout::add));
+
+        layout.add(createCrudAction(true, buttonClickEvent -> refresh()));
+
+        return filterLayout;
+    }
+
+    public void bindFields(Function<String, HasValue<?, ?>> fieldBuilder, Binder<?> binder) {
+        List.of(BeanUtils.getPropertyDescriptors(binder.getBean().getClass())).forEach(descriptor -> {
+            HasValue<?, ?> field = fieldBuilder.apply(descriptor.getName());
+            if (field instanceof Component) {
+                binder.bind(field, descriptor.getName());
             }
-            hl.add((Component) field);
-            filterFormBinder.bind(field, f);
+        });
+    }
+
+    protected void refresh() {
+        if (filterFormBinder != null && filterFormBinder.isValid()) {
+            gridDataProvider.setFilter(filterFormBinder.getBean());
         }
-
-
-        return hl;
+        grid.getSelectionModel().deselectAll();
     }
 
     protected abstract List<String> setupFilterFields();
@@ -156,6 +174,15 @@ public abstract class CrudComponent<F, E extends CrudEntity<E, ?>> extends Verti
         ComboBox<Boolean> comboBox = new ComboBox<>(ComponentUtils.getTranslation(String.join(".", crudService.getEntityClass().getName(), property)));
         comboBox.setItems(true, false);
         comboBox.setItemLabelGenerator(bool -> {return ComponentUtils.getTranslation(bool ? "base_text_yes" : "base_text_no" );});
+        comboBox.setClearButtonVisible(true);
         return comboBox;
+    }
+
+    public static Button createCrudAction(boolean enabled, ComponentEventListener<ClickEvent<Button>> listener) {
+        Button button = new Button();
+        button.setEnabled(enabled);
+        button.setIcon(new Icon(VaadinIcon.REFRESH));
+        button.addClickListener(listener);
+        return button;
     }
 }

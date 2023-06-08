@@ -26,8 +26,8 @@ public class MyGoalRestController {
     }
 
     @GetMapping("/transactions")
-    public ResponseEntity<List<Transaction>> getTransactions() {
-        return ResponseEntity.ok(transactionRepository.findAll());
+    public ResponseEntity<?> getTransactions() {
+        return ResponseEntity.status(200).body(transactionRepository.findAll());
     }
 
     @PostMapping("/transaction")

@@ -29,6 +29,8 @@ public class Transaction extends CrudEntity<Transaction, Long> {
     @Column(name = "TRANSACTION_DATE")
     private LocalDate transactionDate;
 
-    private boolean inMyShare;
+    @Column(name = "IN_MYSHARE", columnDefinition = "boolean default false")
+    @NotNull
+    private boolean inMyShare = false;
 
 }
