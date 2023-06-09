@@ -28,12 +28,12 @@ public class TeamService extends CrudService<TeamFilter, Team, Long> {
     }
 
     @Override
-    public Team CreateEntity() {
+    public Team createEntity() {
         return new Team();
     }
 
     @Override
-    public TeamFilter CreateFilter() {
+    public TeamFilter createFilter() {
         return new TeamFilter();
     }
 }

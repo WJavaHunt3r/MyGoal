@@ -36,12 +36,12 @@ public class BUKCampService extends CrudService<BUKCampFilter, BUKCamp, Long> {
     }
 
     @Override
-    public BUKCamp CreateEntity() {
+    public BUKCamp createEntity() {
         return new BUKCamp();
     }
 
     @Override
-    public BUKCampFilter CreateFilter() {
+    public BUKCampFilter createFilter() {
         return new BUKCampFilter();
     }
 

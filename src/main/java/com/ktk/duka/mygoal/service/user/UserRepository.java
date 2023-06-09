@@ -14,11 +14,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long > {
 
-    long countByUsername(String username);
-
-    List<User> findAllByBirthDateBetween(LocalDate from, LocalDate to);
-
-    List<User> findAllByU20(boolean isU20);
+long countByUsername(String username);
 
     Optional<User> findByUsername(String username);
 

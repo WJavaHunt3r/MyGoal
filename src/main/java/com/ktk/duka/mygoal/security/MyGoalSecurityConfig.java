@@ -57,6 +57,13 @@ public class MyGoalSecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 
 				.authorizeRequests()
+					.antMatchers(
+							"/api/transactions",
+							"/api/transaction"
+					)
+						.permitAll()
+					.and()
+				.authorizeRequests()
 					.requestMatchers(SecurityUtils::isInternalRequest)
 						.permitAll()
 							.anyRequest()

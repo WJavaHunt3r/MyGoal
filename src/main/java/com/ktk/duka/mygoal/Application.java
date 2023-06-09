@@ -1,5 +1,4 @@
 package com.ktk.duka.mygoal;
-
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import org.springframework.boot.SpringApplication;

@@ -17,7 +17,7 @@ public class UserFilter {
 
     private Role role;
 
-    private LocalDate birthdate;
+    private LocalDate birthDateFrom;
 
     private boolean isU20;
 

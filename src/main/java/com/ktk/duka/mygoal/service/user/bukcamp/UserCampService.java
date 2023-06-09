@@ -31,12 +31,12 @@ public class UserCampService extends CrudService<UserCampFilter, UserCamp, Long>
     }
 
     @Override
-    public UserCamp CreateEntity() {
+    public UserCamp createEntity() {
         return new UserCamp();
     }
 
     @Override
-    public UserCampFilter CreateFilter() {
+    public UserCampFilter createFilter() {
         return new UserCampFilter();
     }
 

@@ -2,17 +2,23 @@ package com.ktk.duka.mygoal.views.utils;
 
 import com.ktk.duka.mygoal.config.BusinessContextConfiguration;
 import com.ktk.duka.mygoal.security.SecurityService;
+import com.ktk.duka.mygoal.service.transaction.Transaction;
+import com.ktk.duka.mygoal.service.transactionitems.TransactionItem;
 import com.ktk.duka.mygoal.service.user.User;
 import com.ktk.duka.mygoal.service.utils.TranslationProvider;
+import com.ktk.duka.mygoal.views.login.LoginView;
 import com.ktk.duka.mygoal.views.logout.LogoutView;
 import com.ktk.duka.mygoal.views.status.StatusView;
+import com.ktk.duka.mygoal.views.transactionitems.TransactionItemsView;
+import com.ktk.duka.mygoal.views.transactions.TransactionView;
 import com.ktk.duka.mygoal.views.user.UserView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
@@ -24,6 +30,7 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.InitialPageSettings;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.PageConfigurator;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import lombok.Builder;
@@ -38,8 +45,9 @@ import java.util.*;
 /**
  * The main view is a top-level placeholder for other views.
  */
+@SpringComponent
 @PWA(name = "my-goal", shortName = "my-goal", enableInstallPrompt = false)
-@Theme(themeFolder = "my-goal", variant = Lumo.DARK)
+@Theme(themeFolder = "my-goal", variant = Lumo.LIGHT)
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MainLayout extends AppLayout implements BeforeEnterObserver, PageConfigurator {
 
@@ -68,6 +76,14 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver, PageCo
                         .view(StatusView.class)
                         .build(),
                 MenuItem.builder()
+                        .route(TransactionView.NAME)
+                        .view(TransactionView.class)
+                        .build(),
+                MenuItem.builder()
+                        .route(TransactionItemsView.NAME)
+                        .view(TransactionItemsView.class)
+                        .build(),
+                MenuItem.builder()
                         .route(LogoutView.NAME)
                         .view(LogoutView.class)
                         .build()
@@ -79,7 +95,7 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver, PageCo
     private Component buildHeaderLayout() {
         HorizontalLayout layout = new HorizontalLayout(
                 new HorizontalLayout(buildUserText()),
-                new HorizontalLayout(buildLocaleSelector())
+                new HorizontalLayout(buildLogoutIcon())
         );
 
         layout.setSizeFull();
@@ -113,21 +129,26 @@ public class MainLayout extends AppLayout implements BeforeEnterObserver, PageCo
         return label;
     }
 
-    private Component buildLocaleSelector() {
-        ComboBox<Locale> field = new ComboBox<>();
-        field.setRequired(true);
-        field.setItemLabelGenerator(Locale::getLanguage);
-        field.setItems(translationProvider.getProvidedLocales());
-        field.setValue(UI.getCurrent().getSession().getLocale());
-        field.setWidth("6rem");
-        field.addValueChangeListener(event -> {
-            if (event.getValue() != null) {
-                UI.getCurrent().getSession().setLocale(event.getValue());
-                UI.getCurrent().getPage().reload();
-            }
+    private Component buildLogoutIcon() {
+        Icon logoutIcon = new Icon(VaadinIcon.SIGN_OUT);
+        logoutIcon.addClickListener(iconClickEvent -> {
+            UI.getCurrent().navigate(LoginView.class);
+            securityService.logout();
         });
+//        ComboBox<Locale> field = new ComboBox<>();
+//        field.setRequired(true);
+//        field.setItemLabelGenerator(Locale::getLanguage);
+//        field.setItems(translationProvider.getProvidedLocales());
+//        field.setValue(UI.getCurrent().getSession().getLocale());
+//        field.setWidth("6rem");
+//        field.addValueChangeListener(event -> {
+//            if (event.getValue() != null) {
+//                UI.getCurrent().getSession().setLocale(event.getValue());
+//                UI.getCurrent().getPage().reload();
+//            }
+//        });
 
-        return field;
+        return logoutIcon;
     }
 
     private Component buildDrawerToggle() {

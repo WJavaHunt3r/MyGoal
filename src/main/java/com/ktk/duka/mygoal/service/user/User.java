@@ -43,7 +43,7 @@ public class User extends CrudEntity<User, Long> {
     private Team team;
 
     @Column(name = "ISU20")
-    private boolean u20;
+    private boolean isU20;
 
     @Size(max = 30)
     @Column(name = "USERNAME", length = 30)
@@ -67,6 +67,6 @@ public class User extends CrudEntity<User, Long> {
     private long myShareID;
 
     public String getFullName(){
-        return firstname + " " + lastname;
+        return lastname + " " + firstname;
     }
 }

@@ -37,12 +37,12 @@ public class UserService extends CrudService<UserFilter, User, Long> {
     }
 
     @Override
-    public User CreateEntity() {
+    public User createEntity() {
         return new User();
     }
 
     @Override
-    public UserFilter CreateFilter() {
+    public UserFilter createFilter() {
         return new UserFilter();
     }
 
@@ -66,13 +66,5 @@ public class UserService extends CrudService<UserFilter, User, Long> {
 
     public Optional<User> findByUsername(String username){
         return repository.findByUsername(username);
-    }
-
-    public List<User> findAllByBirthDateBetween(LocalDate from, LocalDate to){
-        return repository.findAllByBirthDateBetween(from, to);
-    }
-
-    public List<User> findByU20(boolean isU20){
-        return repository.findAllByU20(isU20);
     }
 }

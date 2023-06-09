@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Service
 public class UserImportService {
-    private static final String USER_DATA_URL = "C:\\Users\\wagne\\OneDrive\\Dokumentumok\\Myshare\\Pmo_lista.csv";
+    private static final String USER_DATA_URL = "C:\\Users\\wagne\\OneDrive\\Prog\\my-goal\\src\\main\\resources\\META-INF\\resources\\imports\\Pmo_lista.csv";
     private static final Map<String, String> ENGLISH_CHARS = new HashMap();
 
     private UserService userService;
@@ -47,7 +47,14 @@ public class UserImportService {
     }
 
     public void importUsersFromCsv() {
-        if (userService.count() > 0) {
+
+        long count = 0;
+        try{
+            count = userService.count();
+        }catch (Exception e) {
+
+        }
+        if ( count > 0) {
             return;
         }
         List<User> users = new ArrayList<>();
@@ -84,7 +91,7 @@ public class UserImportService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         user.setBirthDate(LocalDate.parse(data[6], formatter));
         user.setRole(StringUtils.isEmpty(data[7]) ? Role.USER : Role.valueOf(data[7]));
-        String username = createUserName(data[8]);
+        String username = createUserName(data[1]+data[2]);
         user.setUsername(username);
         user.setPassword(SecurityUtils.encryptSecret(username));
         user.setU20(Period.between(user.getBirthDate(), LocalDate.now()).getYears() < 18);
@@ -93,7 +100,7 @@ public class UserImportService {
 
     private String createUserName(String data) {
         for (String s : ENGLISH_CHARS.keySet()) {
-            data = data.replace(s, ENGLISH_CHARS.get(s));
+            data = data.toLowerCase().replace(s, ENGLISH_CHARS.get(s));
         }
         return data;
     }

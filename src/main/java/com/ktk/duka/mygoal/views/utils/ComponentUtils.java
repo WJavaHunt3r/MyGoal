@@ -10,7 +10,31 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+import java.util.Collections;
+import java.util.List;
+
 public class ComponentUtils {
+
+    static List<String> HU_MONTH_NAMES = List.of(
+            "Január",
+            "Február",
+            "Március",
+            "Április",
+            "Május",
+            "Június",
+            "Július",
+            "Augusztus",
+            "Szeptember",
+            "Október",
+            "November",
+            "December"
+            );
+
+    static List<String> HU_WEEK_DAYS = List.of("Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap");
+    static List<String> HU_WEEK_DAY_SHORTS = List.of("H", "K", "Sze", "Cs", "P", "Szo", "V");
+    static String HU_WEEK = "Hét";
+    static String HU_TODAY = "Ma";
+    static String HU_CANCEL = "Mégsem";
 
     public static LoginI18n loginFormTranslationProvider(){
         LoginI18n translation = LoginI18n.createDefault();
@@ -30,7 +54,7 @@ public class ComponentUtils {
     }
 
     private static String translateLoginForm(String captionIdPostfix) {
-        return UI.getCurrent().getTranslation(String.join(".", LoginView.class.getName(), captionIdPostfix));
+        return getTranslation(String.join(".", LoginView.class.getName(), captionIdPostfix));
     }
 
     public static Component primaryIcon(Icon icon) {
@@ -58,5 +82,9 @@ public class ComponentUtils {
         layout.setPadding(false);
 
         return layout;
+    }
+
+    public static String getTranslation(String messageCode){
+        return UI.getCurrent().getTranslation(messageCode);
     }
 }
